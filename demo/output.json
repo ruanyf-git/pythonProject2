@@ -1,0 +1,58 @@
+[
+    {
+        "identifier": "LQGSWD",
+        "name": "冷却供水温度",
+        "response": true,
+        "accessMode": "R",
+        "content": {
+            "type": "FLOAT",
+            "step": 0.1,
+            "max": 999999,
+            "min": -999999,
+            "unit": "℃"
+        },
+        "remark": null
+    },
+    {
+        "identifier": "LQGSYL",
+        "name": "冷却供水压力",
+        "response": true,
+        "accessMode": "R",
+        "content": {
+            "type": "FLOAT",
+            "step": 0.1,
+            "max": 999999,
+            "min": -999999,
+            "unit": NaN
+        },
+        "remark": null
+    },
+    {
+        "identifier": "LQHSYL",
+        "name": "冷却回水压力",
+        "response": true,
+        "accessMode": "R",
+        "content": {
+            "type": "FLOAT",
+            "step": 0.1,
+            "max": 999999,
+            "min": -999999,
+            "unit": NaN
+        },
+        "remark": null
+    },
+    {
+        "identifier": "LQHSWD",
+        "name": "冷却回水温度",
+        "response": true,
+        "accessMode": "R",
+        "content": {
+            "type": "FLOAT",
+            "step": 0.1,
+            "max": 999999,
+            "min": -999999,
+            "unit": "℃"
+        },
+        "remark": null
+    }
+]
