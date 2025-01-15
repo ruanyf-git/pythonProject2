@@ -1,80 +1,105 @@
 import time
-
 import pandas as pd
 from pypinyin import lazy_pinyin
 import json
 
 
-def data():
-    # 读取 Excel 文件
-    df = pd.read_excel("/Users/ruanyunfeng/PycharmProjects/pythonProject2/demo/output.xlsx")
+def get_first_letters(chinese_word):
+    """
+    提取中文字符串的拼音首字母，并保留字母、数字和符号。
+    """
+    if not isinstance(chinese_word, str):
+        return ''
+    first_letters = ''.join(
+        lazy_pinyin(char)[0][0].upper() if '\u4e00' <= char <= '\u9fa5' else char
+        for char in chinese_word
+    )
+    return first_letters.replace('#', '_').replace('-', '_')
 
-    # 提取拼音首字母的函数
-    def get_first_letters(chinese_word):
-        # 如果输入不是字符串类型，直接返回空字符串
-        if not isinstance(chinese_word, str):
-            return ''
 
-        first_letters = ''
-        for char in chinese_word:
-            # 如果是中文字符，获取拼音首字母
-            if '\u4e00' <= char <= '\u9fa5':
-                pinyin = lazy_pinyin(char)
-                first_letters += pinyin[0][0].upper() if pinyin else ''
-            # 如果是字母、数字或符号，直接保留
-            else:
-                first_letters += char
-        # 检查是否存在重复值，如果有重复，则在末尾加上 1
-        # while first_letters in df['拼音首字母'].values:
-        #     first_letters += '1'
-        first_letters=first_letters.replace('#', '_')
-
-        return first_letters.replace('-', '_')
-
-    # 应用函数到 Excel 列,前面是输入列，后面是被转字符串列
+def generate_excel_with_pinyin(input_path, output_path):
+    """
+    读取Excel文件，生成拼音首字母列并保存到新的Excel文件。
+    """
+    df = pd.read_excel(input_path)
     df['拼音首字母'] = df['点名'].apply(get_first_letters)
-
-    # 将结果保存到新的 Excel 文件
-    df.to_excel('output.xlsx', index=False)
+    df.to_excel(output_path, index=False)
 
 
-def identifier():
-    # 读取Excel文件
-    df = pd.read_excel('/Users/ruanyunfeng/PycharmProjects/pythonProject2/demo/output.xlsx')
+def generate_json_from_excel(input_path, output_path):
+    """
+    根据Excel数据生成JSON文件。
+    """
+    type_to_step = {
+        "INT": 1,
+        "FLOAT": 0.1
+    }
 
-    # 创建一个空列表来存储JSON对象
-    json_list = []
+    df = pd.read_excel(input_path)
+    attributes_list = []
 
-    # 遍历每一行数据
-    for index, row in df.iterrows():
-        if row['type']=="INT":
-            step=1
-        if row['type']=="FLOAT":
-            step=0.1
+    for _, row in df.iterrows():
+        # 初始化JSON对象
+        identifier = row['拼音首字母']
+        # 检查是否重复，若重复则递增后缀数字
+        original_identifier = identifier
+        suffix = 1
+        while any(attr['identifier'] == identifier for attr in attributes_list):
+            identifier = f"{original_identifier}{suffix}"
+            suffix += 1
         json_obj = {
             "identifier": row['拼音首字母'],
             "name": row['点名'],
             "response": True,
-            "accessMode":  row['accessMode'],
+            "accessMode": row['accessMode'],
             "content": {
-                "type": row['type'],
-                "step": step,
-                "max": 999999,
-                "min": -999999,
-                'unit': row['unit']
+                "type": row['type']
             },
             "remark": None
         }
-        json_list.append(json_obj)
 
-    # 将列表转换为JSON格式字符串
-    json_output = json.dumps(json_list, indent=4, ensure_ascii=False)
-    # 将JSON字符串写入文件
-    with open('output.json', 'w') as f:
-        f.write(json_output)
+        # 根据类型处理不同的字段
+        if row['type'] == "BOOL":
+            json_obj['content']['trueValue'] = row.get('ttt', None)
+            json_obj['content']['falseValue'] = row.get('fff', None)
+        else:
+            json_obj['content']['max'] = 999999
+            json_obj['content']['min'] = -999999
+            step = type_to_step.get(row['type'])
+            if step is not None:
+                json_obj['content']['step'] = step
+
+        # 检查并添加 unit 字段
+        unit = row.get('unit')
+        if pd.notna(unit) and str(unit).strip():
+            json_obj['content']['unit'] = str(unit).strip()
+
+        attributes_list.append(json_obj)
+
+    # 构造最终JSON结构
+    final_json = {
+        "profile": {
+            "productKey": "Cp9CaOn8VcC",
+            "modelId": "1876089854034149378",
+            "modelName": "设备模型2025-01-06_10-14-14"
+        },
+        "attributes": attributes_list,
+        "events": [],
+        "services": []
+    }
+
+    # 写入JSON文件
+    with open(output_path, 'w', encoding='utf-8') as f:
+        json.dump(final_json, f, indent=4, ensure_ascii=False)
 
 
 if __name__ == '__main__':
-    data()
-    time.sleep(1)
-    identifier()
+    # 文件路径
+    input_excel_path = "/Users/ruanyunfeng/PycharmProjects/pythonProject2/demo/output.xlsx"
+    output_excel_path = "output.xlsx"
+    output_json_path = "output.json"
+
+    # 处理流程
+    generate_excel_with_pinyin(input_excel_path, output_excel_path)
+    time.sleep(1)  # 确保文件已保存
+    generate_json_from_excel(output_excel_path, output_json_path)

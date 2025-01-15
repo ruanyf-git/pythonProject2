@@ -31,6 +31,7 @@ def dddtest():
             'y轴': [row['y轴']],
         })], ignore_index=True)
 
+
     # 将结果写入第三个Excel文件
     result_df.to_excel('/Users/ruanyunfeng/PycharmProjects/pythonProject2/device_cmd.xlsx', index=False)
 

@@ -1,58 +1,205 @@
-[
-    {
-        "identifier": "LQGSWD",
-        "name": "冷却供水温度",
-        "response": true,
-        "accessMode": "R",
-        "content": {
-            "type": "FLOAT",
-            "step": 0.1,
-            "max": 999999,
-            "min": -999999,
-            "unit": "℃"
-        },
-        "remark": null
+{
+    "profile": {
+        "productKey": "Cp9CaOn8VcC",
+        "modelId": "1876089854034149378",
+        "modelName": "设备模型2025-01-06_10-14-14"
     },
-    {
-        "identifier": "LQGSYL",
-        "name": "冷却供水压力",
-        "response": true,
-        "accessMode": "R",
-        "content": {
-            "type": "FLOAT",
-            "step": 0.1,
-            "max": 999999,
-            "min": -999999,
-            "unit": NaN
+    "attributes": [
+        {
+            "identifier": "27_FFKZ",
+            "name": "27#风阀控制",
+            "response": true,
+            "accessMode": "RW",
+            "content": {
+                "type": "INT",
+                "max": 999999,
+                "min": -999999,
+                "step": 1,
+                "unit": "%"
+            },
+            "remark": null
         },
-        "remark": null
-    },
-    {
-        "identifier": "LQHSYL",
-        "name": "冷却回水压力",
-        "response": true,
-        "accessMode": "R",
-        "content": {
-            "type": "FLOAT",
-            "step": 0.1,
-            "max": 999999,
-            "min": -999999,
-            "unit": NaN
+        {
+            "identifier": "26_FFKZ",
+            "name": "26#风阀控制",
+            "response": true,
+            "accessMode": "RW",
+            "content": {
+                "type": "FLOAT",
+                "max": 999999,
+                "min": -999999,
+                "step": 0.1,
+                "unit": "%"
+            },
+            "remark": null
         },
-        "remark": null
-    },
-    {
-        "identifier": "LQHSWD",
-        "name": "冷却回水温度",
-        "response": true,
-        "accessMode": "R",
-        "content": {
-            "type": "FLOAT",
-            "step": 0.1,
-            "max": 999999,
-            "min": -999999,
-            "unit": "℃"
+        {
+            "identifier": "25_FFKZ",
+            "name": "25#风阀控制",
+            "response": true,
+            "accessMode": "RW",
+            "content": {
+                "type": "FLOAT",
+                "max": 999999,
+                "min": -999999,
+                "step": 0.1,
+                "unit": "%"
+            },
+            "remark": null
         },
-        "remark": null
-    }
-]
+        {
+            "identifier": "24_FFKZ",
+            "name": "24#风阀控制",
+            "response": true,
+            "accessMode": "RW",
+            "content": {
+                "type": "BOOL",
+                "trueValue": "报警",
+                "falseValue": "正常"
+            },
+            "remark": null
+        },
+        {
+            "identifier": "23_FFKZ",
+            "name": "23#风阀控制",
+            "response": true,
+            "accessMode": "RW",
+            "content": {
+                "type": "FLOAT",
+                "max": 999999,
+                "min": -999999,
+                "step": 0.1,
+                "unit": "%"
+            },
+            "remark": null
+        },
+        {
+            "identifier": "22_FFKZ",
+            "name": "22#风阀控制",
+            "response": true,
+            "accessMode": "RW",
+            "content": {
+                "type": "FLOAT",
+                "max": 999999,
+                "min": -999999,
+                "step": 0.1,
+                "unit": "%"
+            },
+            "remark": null
+        },
+        {
+            "identifier": "21_FFKZ",
+            "name": "21#风阀控制",
+            "response": true,
+            "accessMode": "RW",
+            "content": {
+                "type": "FLOAT",
+                "max": 999999,
+                "min": -999999,
+                "step": 0.1,
+                "unit": "%"
+            },
+            "remark": null
+        },
+        {
+            "identifier": "17_FFFK",
+            "name": "17#风阀反馈",
+            "response": true,
+            "accessMode": "RW",
+            "content": {
+                "type": "FLOAT",
+                "max": 999999,
+                "min": -999999,
+                "step": 0.1,
+                "unit": "%"
+            },
+            "remark": null
+        },
+        {
+            "identifier": "16_FFFK",
+            "name": "16#风阀反馈",
+            "response": true,
+            "accessMode": "RW",
+            "content": {
+                "type": "FLOAT",
+                "max": 999999,
+                "min": -999999,
+                "step": 0.1,
+                "unit": "%"
+            },
+            "remark": null
+        },
+        {
+            "identifier": "15_FFFK",
+            "name": "15#风阀反馈",
+            "response": true,
+            "accessMode": "RW",
+            "content": {
+                "type": "FLOAT",
+                "max": 999999,
+                "min": -999999,
+                "step": 0.1,
+                "unit": "%"
+            },
+            "remark": null
+        },
+        {
+            "identifier": "14_FFFK",
+            "name": "14#风阀反馈",
+            "response": true,
+            "accessMode": "RW",
+            "content": {
+                "type": "FLOAT",
+                "max": 999999,
+                "min": -999999,
+                "step": 0.1,
+                "unit": "%"
+            },
+            "remark": null
+        },
+        {
+            "identifier": "13_FFFK",
+            "name": "13#风阀反馈",
+            "response": true,
+            "accessMode": "RW",
+            "content": {
+                "type": "FLOAT",
+                "max": 999999,
+                "min": -999999,
+                "step": 0.1,
+                "unit": "%"
+            },
+            "remark": null
+        },
+        {
+            "identifier": "12_FFFK",
+            "name": "12#风阀反馈",
+            "response": true,
+            "accessMode": "RW",
+            "content": {
+                "type": "FLOAT",
+                "max": 999999,
+                "min": -999999,
+                "step": 0.1,
+                "unit": "%"
+            },
+            "remark": null
+        },
+        {
+            "identifier": "11_FFFK",
+            "name": "11#风阀反馈",
+            "response": true,
+            "accessMode": "RW",
+            "content": {
+                "type": "FLOAT",
+                "max": 999999,
+                "min": -999999,
+                "step": 0.1,
+                "unit": "%"
+            },
+            "remark": null
+        }
+    ],
+    "events": [],
+    "services": []
+}
